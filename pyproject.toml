@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dads-benchmark"
+version = "1.0.0"
+description = "Deterministic Autonomous Decoupled State (D.A.D.S.) Benchmark Suite — Pre-registered multi-turn reliability evaluation"
+readme = "README.md"
+authors = [
+  { name = "Brad Smith", email = "madbradsmith@gmail.com" }
+]
+license = { text = "Apache-2.0" }
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Topic :: Software Development :: Testing",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
+keywords = [
+  "ai",
+  "agents",
+  "benchmark",
+  "llm",
+  "slm",
+  "context-window",
+  "state-management",
+  "evaluation",
+  "decoupled-state",
+  "pre-registered"
+]
+requires-python = ">=3.9"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.0",
+]
+
+[project.scripts]
+dads = "dads.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/madbradsmith/DADS"
+Repository = "https://github.com/madbradsmith/DADS.git"
+Specification = "https://github.com/madbradsmith/DADS/blob/main/docs/DADS_SPEC_V1.md"
+RunPlan = "https://github.com/madbradsmith/DADS/blob/main/docs/STANDARD_TRIAL_RUN_PLAN.txt"
+
