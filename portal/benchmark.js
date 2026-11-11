@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     initDeckTabs();
     initMatrixFilters();
+    checkUrlHashTab();
+    window.addEventListener('hashchange', checkUrlHashTab);
 
     const res = await fetch('data.json');
     benchmarkData = await res.json();
@@ -18,6 +20,47 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.error('Failed to load benchmark data:', err);
   }
 });
+
+function activateDeckTab(targetId, scrollToVault = false) {
+  const tabButtons = document.querySelectorAll('.deck-tab-btn');
+  const tabPanels = document.querySelectorAll('.deck-panel');
+  tabButtons.forEach(b => {
+    b.classList.toggle('active', b.dataset.tab === targetId);
+  });
+  tabPanels.forEach(p => {
+    p.classList.toggle('active', p.id === targetId);
+  });
+  if (scrollToVault) {
+    const vault = document.getElementById('receipt-vault');
+    if (vault) vault.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+function checkUrlHashTab() {
+  const hash = (window.location.hash || '').replace('#', '').toLowerCase();
+  const hashMap = {
+    'dads': 'tab-dads',
+    'spec': 'tab-dads',
+    'tab-dads': 'tab-dads',
+    'manifesto': 'tab-manifesto',
+    'tab-manifesto': 'tab-manifesto',
+    'callout': 'tab-manifesto',
+    'eviction': 'tab-manifesto',
+    'turns': 'tab-turns',
+    'tab-turns': 'tab-turns',
+    'matrix': 'tab-matrix',
+    'tab-matrix': 'tab-matrix',
+    'telemetry': 'tab-telemetry',
+    'tab-telemetry': 'tab-telemetry',
+    'disclosures': 'tab-disclosures',
+    'tab-disclosures': 'tab-disclosures',
+    'simulator': 'tab-simulator',
+    'tab-simulator': 'tab-simulator'
+  };
+  if (hashMap[hash]) {
+    activateDeckTab(hashMap[hash], true);
+  }
+}
 
 /**
  * Deck Tab Navigation Controller
